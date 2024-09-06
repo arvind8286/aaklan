@@ -1,0 +1,134 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Manage Question</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Add Bulk Question</li>
+  </ol>
+</div>
+
+<!-- form start  -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h5 class="mb-0">Add Bulk Question </h5>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select Sector Name <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Select sector</mat-label>
+              <mat-select [(ngModel)]="objbulquest.sector_id" (selectionChange)="getalljobrole()"  name="sector">
+               <mat-option *ngFor="let item of sectorlist|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.sector_name}}</mat-option>
+
+            </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select Job Role name <span>*</span></label>
+            <mat-form-field [ariaReadOnly]="true" appearance="fill">
+              <i class="ri-briefcase-line"></i>
+              <mat-label >Select Job Role name</mat-label>
+              <mat-select [(ngModel)]="objbulquest.job_role_id" (selectionChange)="getQuestSETList()"  name="job_role_id">
+                <mat-option *ngFor="let item of jobroleList|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.job_role_name}}</mat-option>
+
+             </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+              </div>
+
+      <div class="row">
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select NOS Element Name <span>*</span></label>
+            <mat-form-field [ariaReadOnly]="true" appearance="fill">
+              <i class="ri-briefcase-line"></i>
+              <mat-label >Select NOS Element Name</mat-label>
+              <mat-select [(ngModel)]="objbulquest.nos_element_id" (selectionChange)="getQuestSETList()"  name="nos_element_name">
+                <mat-option *ngFor="let item of nosElementList|statusFilter:'Active'" [value]="item.id">{{item.nos_element_name}}</mat-option>
+
+             </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div> -->
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select Paper Set Name<span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-file-paper-2-line"></i>
+              <mat-label>Select Paper Set Name</mat-label>
+              <mat-select [(ngModel)]="objbulquest.paper_set_id"  name="papersetid">
+                <mat-option *ngFor="let item of papersetList|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.paper_set_name}}</mat-option>
+
+             </mat-select>
+            </mat-form-field>
+            </div>
+        </div>
+      </div>
+
+
+      <br>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <mat-card class="mb-25 tagus-card">
+              <mat-card-header>
+                  <h5 class="mb-0">Drop the Excel File to  Upload</h5>
+              </mat-card-header>
+              <mat-card-content>
+                  <ngx-dropzone   (change)="onSelect($event)">
+                      <ngx-dropzone-label class="fw-semibold">Drop files here or click to upload.</ngx-dropzone-label>
+                      <ngx-dropzone-preview *ngFor="let f of filesdata" [removable]="true" (removed)="onRemove(f)">
+                          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                      </ngx-dropzone-preview>
+                  </ngx-dropzone>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <button  type="button" (click)="Downloadfile()"  mat-flat-button class="tagus">
+
+          <i class="ri-file-excel-2-line" style="font-size: 25px;"></i>
+          <!-- <span class="flaticon-add"></span> -->
+          Download Sample File</button>
+    </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">&nbsp;</label>
+            <button  type="button" (click)="bulkAdd()"  mat-flat-button class="tagus">
+
+              <span class="ri-file-add-line"></span>
+              <!-- <span class="flaticon-add"></span> -->
+              Bulk Add</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button type="reset" mat-flat-button color="warn">
+              <span class="ri-format-clear"></span>
+              Clear</button>
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>

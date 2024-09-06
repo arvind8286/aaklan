@@ -1,0 +1,216 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Candidate Panel</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Assessment</li>
+
+  </ol>
+</div>
+<!-- webcam autocapture start -->
+
+<!-- <h2>AutoCapture</h2>  -->
+ <div class="row">
+  <div class="col-4">
+    <webcam *ngIf="stream" hidden="true"  [height]="100" [trigger]="$trigger" (imageCapture)="takeimage($event)"></webcam>
+  </div>
+  <!-- <div class="col-4">
+    <div *ngIf="previewimg">
+      <img [src]="previewimg" alt="" height="100px" width="150px" >
+    </div>
+  </div> -->
+ </div>
+
+<hr>
+
+<!-- webcam autocapture end -->
+
+<!-- <webcam *ngIf="stream" [height]="250" hidden="true" [trigger]="$trigger" (imageCapture)="snapshort($event)"></webcam> -->
+<mat-card *ngIf="questionfeatch"  class="teamMembersListTable mb-25 tagus-card">
+  <mat-card-header class="border-bottom">
+    <!-- <video #videoElement [hidden]="true" width="640" height="480" autoplay></video>
+    <canvas [hidden]="true" #canvasElement width="640" height="480"></canvas> -->
+
+
+    <div class="row">
+
+
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <h5 class="mb-0">Answer Provided to:</h5>
+        <br>
+        <nav aria-label="Page navigation example d-flex">
+
+            <button mat-mini-fab *ngFor="let ans of testdata let i=index" [ngClass]="testdata[i].answer!=null ? 'text-bg-success mb-10 ms-5' : 'text-soft-dark mb-10 ms-5'" (click)="answerindex(i)">{{i+1}}</button>
+            <!-- <button mat-mini-fab  [ngClass]="answelabel" >1</button> -->
+            <!-- <button mat-mini-fab  class=" text-bg-success mb-10 ms-5" >1</button>
+            <button mat-mini-fab  class=" text-bg-warning mb-10 ms-5" >1</button>
+            <button mat-mini-fab  class=" text-soft-dark mb-10 ms-5" >1</button> -->
+
+
+      </nav>
+      </div>
+
+    </div>
+
+  </mat-card-header>
+  <mat-card-content >
+
+
+    <div class="row">
+      <div class=" d-flex col-md-12 col-lg-12 col-sm-12 text-bg-primary border-radius  text-center ">
+          <h5 class="m-15  text-white ">Question: <span class="badge rounded-pill text-bg-warning"><h6>{{currentquestion+1}} of {{testdata.length}}</h6></span> </h5>
+          <h5 class="m-15  text-white justify-content-end">Total Time Remaining: &nbsp;<span  class="badge rounded-pill text-bg-danger">{{ minutes }}:{{ seconds }} min</span></h5>
+          <!-- <h5 class="m-15  text-white ">Question Type: <span class="badge rounded-pill text-bg-warning"><h6>{{qtype|capitalize}}</h6></span> </h5> -->
+
+      </div>
+    </div>
+    <br>
+
+<!-- ng for logic start -->
+<div *ngFor="let questions of testdata; let i = index">
+  <div *ngIf="i === currentquestion">
+    <!-- <p>{{ questions.question }}</p> -->
+    <div class="row mb-25">
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <h3>Q {{i+1}}. {{ questions.question }}</h3>
+      </div>
+    </div>
+
+    <!-- Multiple choice -->
+    <div *ngIf="questions.question_type.toLowerCase() === 'mcq'">
+      <div class="row mb-30">
+        <div class="col">
+
+          <h6>CHOSE ANSWER ,OPTIONS ARE:</h6>
+        </div>
+      </div>
+      <mat-radio-group name="mcq" [(ngModel)]="questions.answer">
+      <div class="row mb-25">
+
+        <div class="col-md-6 col-lg-6 col-sm-12">
+
+
+          <h5><span class="badge rounded-pill text-bg-warning text-bold">A</span>  <mat-radio-button name="mcq"  value="a" >{{questions.option_a }}</mat-radio-button></h5>
+
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <h5><span class="badge rounded-pill text-bg-warning text-bold">B</span>  <mat-radio-button name="mcq" value="b" >{{questions.option_b }}</mat-radio-button></h5>
+
+        </div>
+      </div>
+      <div class="row mb-25">
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <h5><span class="badge rounded-pill text-bg-warning text-bold">C</span>  <mat-radio-button name="mcq"  value="c" >{{questions.option_c }}</mat-radio-button></h5>
+
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <h5><span class="badge rounded-pill text-bg-warning text-bold">D</span>  <mat-radio-button  name="mcq" value="d" >{{questions.option_d }}</mat-radio-button></h5>
+
+        </div>
+
+      </div>
+    </mat-radio-group>
+    </div>
+    <div *ngIf="questions.question_type.toLowerCase() === 'fill_in_the_blank'">
+      <div class="row mb-30">
+        <div class="col">
+
+          <h6>FILL IN THE BLANKS ,WRITE YOUR ANSWER BELOW</h6>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="tagus-form-group">
+          <label class="d-block mb-12 fw-semibold gray-color">Give an Answer <span>*</span></label>
+          <mat-form-field appearance="fill">
+            <i class="ri-file-paper-2-line"></i>
+            <mat-label>Your answer is </mat-label>
+            <textarea matInput [(ngModel)]="questions.answer" name="fill_in_the_blank"></textarea>
+            <!-- <input matInput appDecimalNumber  name="one_word" [(ngModel)]="testdata[currentquestion].answer" > -->
+          </mat-form-field>
+          </div>
+      </div>
+
+    </div>
+    <div *ngIf="questions.question_type.toLowerCase() === 'one_word'">
+      <div class="row mb-30">
+        <div class="col">
+
+          <h6>GIVE ONE WORD ANSWER ,WRITE YOUR ANSWER BELOW</h6>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="tagus-form-group">
+          <label class="d-block mb-12 fw-semibold gray-color">Give an Answer  <span>*</span></label>
+          <mat-form-field appearance="fill">
+            <i class="ri-file-paper-2-line"></i>
+            <mat-label>Your answer is </mat-label>
+            <input matInput [(ngModel)]="questions.answer" name="one_word">
+            <!-- <input matInput appDecimalNumber  name="one_word" [(ngModel)]="testdata[currentquestion].answer" > -->
+          </mat-form-field>
+          </div>
+      </div>
+
+    </div>
+    <div *ngIf="questions.question_type.toLowerCase() === 'true_false'">
+
+<div class="row mb-30">
+        <div class="col">
+
+          <h6>CHOSE TRUE OR FALSE ,OPTIONS ARE:</h6>
+        </div>
+      </div>
+      <mat-radio-group name="true_false" [(ngModel)]="questions.answer">
+      <div class="row mb-25">
+
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <h5><span class="badge rounded-pill text-bg-warning text-bold">A</span>  <mat-radio-button name="true_false"  value="a" >{{questions.option_a |capitalize}}</mat-radio-button></h5>
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <h5><span class="badge rounded-pill text-bg-warning text-bold">B</span>  <mat-radio-button name="true_false" value="b" >{{questions.option_b |capitalize}}</mat-radio-button></h5>
+
+        </div>
+      </div>
+
+    </mat-radio-group>
+    </div>
+
+
+
+    <!-- Subjective -->
+    <!-- <div *ngIf="question.type === 'subjective'">
+      <textarea [(ngModel)]="question.answer"></textarea>
+    </div> -->
+  </div>
+</div>
+<!-- ng for logic end -->
+
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-sm-12 ">
+
+        <button  mat-raised-button class="text-soft-dark me-25 " (click)="previous()" [disabled]="currentquestion === 0"><i class="ri-arrow-left-double-fill"></i> Previous </button>
+        <button  mat-raised-button color="primary me-25 " [disabled]="currentquestion === testdata.length - 1" (click)="next()" >Next <i class="ri-arrow-right-double-fill"></i> </button>
+        <button  mat-raised-button class="text-bg-success me-25 " (click)=" submit()"  >{{submit_text}}</button>
+
+      </div>
+    </div>
+    <div class="row mt-30 justify-content-end">
+      <div class="col-3  ">
+        <button  mat-flat-button class="tagus me-25 btn-bg-danger end" color="warn" (click)="finish()" >Finish Test</button>
+
+      </div>
+    </div>
+  <!-- </mat-card-footer>
+</mat-card> -->
+<!-- <div *ngIf="questionfeatch==false" class="row">
+  <div class="alert alert-primary text-center" role="alert">
+
+Question is not set
+
+
+  </div>
+</div> -->

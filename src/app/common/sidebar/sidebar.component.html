@@ -1,0 +1,319 @@
+
+<div
+    class=" sidebar-area bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="false"
+
+>
+    <!-- <div class="logo" style="background-color: #000;" > -->
+      <div class="logo" style="background-color: #ffffff;" >
+        <a routerLink="#" class="d-flex align-items-center" >
+            <!-- <img src="assets/img/final_aaklan_logo.png" alt="AAKALAN"> -->
+            <img src="assets/img/final_aaklan_logo_drk.png" width="80%" alt="AAKALAN">
+            <!-- <img src="assets/img/aak" alt="logo"> -->
+
+        </a>
+    </div>
+    <br>
+    <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+        <span class="top-bar"></span>
+        <span class="middle-bar"></span>
+        <span class="bottom-bar"></span>
+    </div>
+    <ng-scrollbar visibility="hover" style="height: 100vh;">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                  <span class="sub-title gray-color">Dashboard Panel</span>
+
+                  <a routerLink="/dashboard" class="sidebar-menu-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
+                    <!-- <i class="flaticon-to-do-list"></i> -->
+                    <i class="flaticon-menu-1"></i>
+                    <span class="title">Dashboard</span>
+                  </a>
+                    <span class="sub-title gray-color">Admin Panel</span>
+                    <mat-expansion-panel (opened)="panelOpenState = true"  (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <!-- <i class="flaticon-menu-1"></i> -->
+                                <i class="flaticon-setting"></i>
+                                <span class="title">Admin Setting</span>
+                                <span class="badge">13</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/country" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Country
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/state" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  State
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <!-- <a routerLink="/city" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Manage City
+                                </a> -->
+                                <a routerLink="/city" routerLinkActive="active" class="sidemenu-link">
+                                  City
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/sector" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Sectors
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                              <a routerLink="/scheme" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                Scheme
+                                <!-- <span class="badge">New</span> -->
+                              </a>
+                          </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/jobrole" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Job role
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/nosdetails" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                NOS
+                                  <!-- <span class="badge">New</span> -->
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/noselements" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                NOS Elements
+                                  <!-- <span class="badge">New</span> -->
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                              <a routerLink="/pcdetails" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                PC details
+                                <!-- <span class="badge">New</span> -->
+                              </a>
+                          </li>
+
+                        <li class="sidemenu-item">
+                          <a routerLink="/managetp" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                            Manage TP
+                            <!-- <span class="badge">New</span> -->
+                          </a>
+                      </li>
+
+                    <li class="sidemenu-item">
+                      <a routerLink="/manageassessor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                        Assessor
+                        <!-- <span class="badge">New</span> -->
+                      </a>
+                  </li>
+                  <!-- <li class="sidemenu-item">
+                    <a routerLink="/manageuser" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                      Users
+
+                    </a>
+                </li> -->
+                        </ul>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                      <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <i class="flaticon-resume"></i>
+                              <span class="title">Question</span>
+                              <span class="badge three">3</span>
+                          </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <ul class="sidebar-sub-menu">
+                        <li class="sidemenu-item">
+                          <a routerLink="/quesset" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                            Question set
+                            <!-- <span class="badge">New</span> -->
+                          </a>
+                      </li>
+                          <li class="sidemenu-item">
+                              <a routerLink="/addquestion" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                Add Question
+                              </a>
+                          </li>
+                          <li class="sidemenu-item">
+                              <a routerLink="/bulkquestionUpload" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                Add Bulk Question
+                              </a>
+                          </li>
+                          <!-- <li class="sidemenu-item">
+                              <a routerLink="/email/read" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                Manage jobrole paperset
+                              </a>
+                          </li> -->
+                      </ul>
+                  </mat-expansion-panel>
+                    <!-- <span class="sub-title gray-color">Documents</span> -->
+                    <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-layer"></i>
+                                <span class="title">Evidence</span>
+                                <span class="badge three">1</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                          <li class="sidemenu-item">
+                            <a routerLink="/createEvidance" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                              Evidence Setting
+                            </a>
+                        </li> -->
+                        <!-- <li class="sidemenu-item">
+                          <a routerLink="/getevidance" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                            Get Evidance
+                          </a>
+                      </li> -->
+                        <!-- <li class="sidemenu-item">
+                          <a routerLink="/file-manager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                            Assign Evidance
+                          </a>
+                      </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/file-manager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Documents Management
+                                </a>
+                            </li> -->
+
+                        <!-- </ul>
+                    </mat-expansion-panel> -->
+
+
+
+
+                    <span class="sub-title gray-color">Batch</span>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-people"></i>
+                                <span class="title">Batch </span>
+                                <span class="badge two">3</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/createbatch" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Batch
+                                </a>
+                            </li>
+                            <!-- <li class="sidemenu-item">
+                                <a routerLink="/members-grid-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Allocated Batches
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/members-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Scheduled Batches
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Today Batches
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                              <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                Ongoing Batches
+                              </a>
+                          </li>
+                          <li class="sidemenu-item">
+                            <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                              Completed Batches
+                            </a>
+                        </li>
+                        <li class="sidemenu-item">
+                          <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                            Pending Payment
+                          </a>
+                      </li>
+                      <li class="sidemenu-item">
+                        <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                          Archived
+                        </a>
+                    </li> -->
+                    <li class="sidemenu-item">
+                      <a routerLink="/candidate" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                        Candidate
+                      </a>
+                  </li>
+                  <li class="sidemenu-item">
+                    <a routerLink="/assigntest" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                      Assign Test
+                    </a>
+                </li>
+                        </ul>
+                    </mat-expansion-panel>
+                    <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-credit-card"></i>
+                                <span class="title">Credit Management</span>
+                                <span class="badge">1</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/invoice" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Request Credits
+                                </a>
+                            </li>
+
+                        </ul>
+                    </mat-expansion-panel> -->
+                    <span class="sub-title gray-color">Reports</span>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-pie-chart"></i>
+                                <span class="title">Report</span>
+                                <span class="badge">1</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/studentwiseReport" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Candidate Wise
+                                </a>
+                            </li>
+                            <!-- <li class="sidemenu-item">
+                                <a routerLink="/projects/team" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Batch Count Monthly
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/projects" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  Batch Count SSC Wise
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/projects/kanban-board" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                  TP Batch Report Monthly
+                                </a>
+                            </li> -->
+
+                        </ul>
+                    </mat-expansion-panel>
+                    <!-- <a routerLink="/dashboard" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                       <i class="flaticon-to-do-list"></i>
+                      <i class="flaticon-coding"></i>
+                      <span class="title">Candidate</span>
+                    </a> -->
+                    <span class="sub-title gray-color">Action</span>
+
+                    <a routerLink="/adminlogout" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                      <!-- <i class="flaticon-to-do-list"></i> -->
+                      <i class="flaticon-airplane"></i>
+                      <span class="title">Logout</span>
+                    </a>
+
+
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

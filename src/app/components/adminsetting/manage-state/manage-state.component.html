@@ -1,0 +1,231 @@
+<mat-drawer #drawer mode='over' position="end">
+  <mat-card>
+    <mat-card-header class="title d-flex align-items-center justify-content-space-between">
+      <h4 class="mb-20">{{ flag ? 'Add State ' : 'Edit State' }}</h4>
+      <button class="close-btn bg-transparent p-0 border-none align-items-end"style="cursor: pointer;"   (click)="close()"><i class="flaticon-close"></i></button>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Select Country <span>*</span></label>
+                    <!--  <mat-form-field appearance="fill">
+                        <i class="flaticon-worldwide"></i>
+                        <mat-label>Select Country</mat-label>-->
+
+                        <!-- <mat-select [(ngModel)]="objstate.country_id" (selectionChange)="getAllstatelist()"   name="country_id">
+                            <mat-option *ngFor="let item of getdatacountry|statusFilter:'Active'"  [value]="item.country_id">
+                            {{ item.country_name }}
+                          </mat-option>
+                        </mat-select>
+
+                      </mat-form-field>-->
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <i class="flaticon-worldwide"></i>
+                        <mat-label>Country Name</mat-label>
+                        <input matInput
+                            aria-label="Country"
+                            [matAutocomplete]="auto"
+                            [formControl]="countryCtrl"
+                            (change)="getAllstatelist()"
+                        >
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let contry of (filteredOptions|async)" [value]="contry.country_name">
+                                <!-- <img alt="flag" class="example-option-img" [src]="state.flag" width="25"> -->
+                                <span *ngIf="contry.status=='Active'">{{contry.country_name}}</span>
+                                <!-- <small>Population: {{contry.population}}</small> -->
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+              </div>
+              </div>
+          <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                  <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Enter State Name <span>*</span> </label>
+                      <mat-form-field appearance="fill">
+                          <i class="flaticon-worldwide"></i>
+                          <mat-label> State name eg. bokaro</mat-label>
+                          <input matInput [(ngModel)]="objstate.state_name" name="state_name">
+                      </mat-form-field>
+                  </div>
+              </div>
+              </div>
+          <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                  <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Enter state code <span>*</span></label>
+                      <mat-form-field appearance="fill">
+                          <i class="flaticon-phone-call"></i>
+                          <mat-label>Enter state code </mat-label>
+                          <input matInput [(ngModel)]="objstate.state_code" name="state_code">
+                      </mat-form-field>
+                  </div>
+
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 text-start">
+                <div class="tagus-form-group">
+
+                    <button *ngIf="flag==true"  type="button" (click)="onsave()" mat-flat-button class="tagus" >
+
+                      <span class="ri-file-add-line"></span>
+                          Add</button>
+
+
+                    <button *ngIf="flag==false" type="button"  (click)="onupdate()" mat-flat-button class="tagus" >
+
+                      <span class="ri-file-add-line"></span>
+                          Update</button>
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  <!-- <button  *ngIf="flag==true"  type="reset" mat-flat-button color="warn">
+                    <span class="ri-format-clear"></span>
+                    Clear</button> -->
+                    <button type="button" (click)="close()" mat-raised-button class="gray">
+                      <!-- <span class="flaticon-close"></span> -->
+                      Close</button>
+
+
+                </div>
+              </div>
+            </div>
+
+
+      </form>
+  </mat-card-content>
+  </mat-card>
+
+</mat-drawer>
+<mat-drawer-content>
+
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Manage State</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+      <li class="breadcrumb-item">
+          <a routerLink="/">
+              <i class="ri-home-8-line"></i>
+              Admin Setting
+          </a>
+      </li>
+      <li class="breadcrumb-item fw-semibold">Manage State</li>
+  </ol>
+</div>
+
+<!-- <mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+      <h5 class="mb-0">Search & Filter</h5>
+  </mat-card-header>
+
+</mat-card> -->
+<!-- Aggrid view data -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header >
+      <h3 class="mb-0">State List</h3>
+
+      <mat-form-field>
+
+        <mat-label><span class="ri-search-line"></span>&nbsp;&nbsp;Enter Keyword to Filter data  </mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #name/>
+
+      </mat-form-field>
+
+      <button mat-flat-button class="default-btn tagus" (click)="openDrawer()">
+        <i class="ri-add-fill"></i> Add
+    </button>
+
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+            <table   mat-table [dataSource]="datasource">
+
+                <!-- Column -->
+                <ng-container matColumnDef="country_name">
+                    <th mat-header-cell *matHeaderCellDef class="text-start" >Country Name</th>
+                    <td mat-cell *matCellDef="let element" class="fw-semibold text-start">{{element.country_name}}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="state_name">
+                    <th mat-header-cell *matHeaderCellDef>State Name</th>
+                    <td mat-cell *matCellDef="let element">{{element.state_name}}</td>
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="state_code">
+                    <th mat-header-cell *matHeaderCellDef>State Code</th>
+                    <td mat-cell *matCellDef="let element">{{element.state_code}}</td>
+                </ng-container>
+
+                <!-- Vendor Column -->
+                <ng-container matColumnDef="status">
+                    <th  mat-header-cell *matHeaderCellDef>Status</th>
+                    <td mat-cell *matCellDef="let element">
+                      <span *ngIf="element.status=='Active'">
+                      <span class="badge">{{element.status}}</span>
+                      </span>
+                      <span *ngIf="element.status=='Deactivated'">
+                        <span class="badge inactive">{{element.status}}</span>
+                        </span>
+
+
+                    </td>
+
+
+                </ng-container>
+
+
+                <ng-container matColumnDef="state_id">
+                    <th mat-header-cell *matHeaderCellDef >Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-slide-toggle [checked]="element.status === 'Active'" (change)="statusfun(element)" matTooltip="Acticate/Deactivate" matTooltipPosition="above">
+
+                      </mat-slide-toggle>
+
+                        <button mat-icon-button color="primary" (click)="update(element)" matTooltip="Update Record" matTooltipPosition="above">
+                          <mat-icon>edit</mat-icon>
+
+
+                        </button>
+                        <button mat-icon-button color="warn" (click)="ondelete(element)" matTooltip="Delete Record" matTooltipPosition="above">
+
+                          <mat-icon>delete</mat-icon>
+                      </button>
+
+                        </td>
+                        |
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <mat-card class="mb-25 tagus-card">
+
+            <mat-card-content>
+              <mat-paginator [length]=""
+                  [pageSize]="pageSize"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  showFirstLastButtons
+                  aria-label="Select page"
+                  (page)="onPageChange($event.pageIndex + 1)">
+              </mat-paginator>
+          </mat-card-content>
+          </mat-card>
+      </div>
+
+  </mat-card-content>
+</mat-card>
+</mat-drawer-content>
+

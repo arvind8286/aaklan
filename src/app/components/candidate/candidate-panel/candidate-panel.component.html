@@ -1,0 +1,69 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Candidate Panel</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Assessment</li>
+
+  </ol>
+</div>
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h2 class="mb-0 badge text-bg-success">Welcome <span class="badge text-bg-warning"> {{sname}}</span></h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <h3 class="badge text-bg-danger">Please NOTE:</h3>
+      <p>The maximum time alloted is <span class="badge text-bg-info">{{objinst.test_duration}} Min</span> ,please read all instruction carefully before attempting</p>
+      <div class="row">
+        <div *ngIf="instdata==false" class="col" [innerHTML]="objinst.instructions">
+          <!-- <ol>
+          <b> <li>There is no negative marking.</li></b>
+            <b><li>Do not refresh the page,or move out of the window,or press the back button ,after you start the Assessment</li></b>
+            <b><li>You can choose to submit/Finish the test without giving the all question also. </li></b>
+            <b><li>The TEST will be automatically Submitted and closed after the allowed time.</li></b>
+
+          </ol> -->
+        </div>
+        <div *ngIf="instdata!=false">
+          <P>No any instruction is given.</P>
+          <!-- <ol>
+            <b> <li>There is no negative marking.</li></b>
+              <b><li>Do not refresh the page,or move out of the window,or press the back button ,after you start the Assessment</li></b>
+              <b><li>You can choose to submit/Finish the test without giving the all question also. </li></b>
+              <b><li>The TEST will be automatically Submitted and closed after the allowed time.</li></b>
+
+            </ol> -->
+        </div>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <br>
+  <br>
+  <mat-card-footer>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+       <h5>Test Name:</h5> <h5 class="badge text-bg-warning">{{objinst.paper_set_name | capitalize}}</h5>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h5>Test Allowed:</h5> <h5 class="badge text-bg-info">{{objinst.test_duration}} Min</h5>
+       </div>
+       <div class="col-lg-4 col-md-4 col-sm-12">
+        <button  type="button" (click)="capturedetails()"  mat-flat-button class="tagus">
+
+        <span class="ri-file-add-line"></span>
+
+        Capture Details</button>
+       </div>
+    </div>
+  </mat-card-footer>
+</mat-card>
+
+
+

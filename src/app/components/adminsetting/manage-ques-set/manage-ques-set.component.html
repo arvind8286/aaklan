@@ -1,0 +1,391 @@
+<mat-drawer #drawer mode='over' position="end">
+  <div *ngIf="detail==false" class="mb-25 personal-info-card tagus-card">
+    <div class="title d-flex align-items-center justify-content-space-between drowerheader">
+      <h5>{{ flag ? 'Add Question Paper Set' : 'Edit Question Paper Set' }}</h5>
+      <button class="close-btn bg-transparent p-0 border-none align-items-end" style="cursor: pointer;"
+        (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <form>
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Assesment Mode <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-file-paper-2-line"></i>
+                  <mat-label>Select Assign mode</mat-label>
+                  <mat-select   name="assignmode" [(ngModel)]="objquest.assessment_mode" [disabled]="true">
+                    <mat-option value="Online">Online</mat-option>
+                    <mat-option value="Offline">Offline</mat-option>
+                    <mat-option value="Both">Both(online/offline)</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Select Sector Name <span>*</span> </label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-git-branch-line"></i>
+                  <mat-label>Select sector</mat-label>
+                  <mat-select   name="sector" [(ngModel)]="objquest.sector_id" (selectionChange)="getalljobrole()" [disabled]="dispflag">
+                    <mat-option value="" disabled>Select sector</mat-option>
+
+                    <mat-option *ngFor="let item of secotorList|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.sector_name}}</mat-option>
+
+                 </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Select Job Role name <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-git-branch-line"></i>
+                  <mat-label>Select Job Role</mat-label>
+                  <mat-select   name="sector" [(ngModel)]="objquest.job_role_id" [disabled]="dispflag">
+                    <mat-option value="" disabled>Select Jobrole</mat-option>
+
+                    <mat-option *ngFor="let item of jobroleList|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.job_role_name}}</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+
+            </div>
+                  </div>
+          <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Paper Set Name<span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-briefcase-line"></i>
+
+                  <mat-label>Enter Paper set Name</mat-label>
+                  <input matInput  name="papersetname" [(ngModel)]="objquest.paper_set_name" [disabled]="dispflag">
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Assessment Type <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-git-branch-line"></i>
+                  <mat-label>Assesment Type </mat-label>
+                  <mat-select   name="assementtype" [(ngModel)]="objquest.assessment_type" [disabled]="dispflag">
+                   <mat-option value="Theory">Theory</mat-option>
+                   <mat-option value="Viva">Viva</mat-option>
+                   <mat-option value="Practical">Practical</mat-option>
+
+
+                </mat-select>
+
+                </mat-form-field>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Valid Till<span>*</span></label>
+
+                <!-- <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> -->
+
+                <mat-form-field appearance="fill" class="date-input">
+                  <!-- <i class="ri-git-branch-line"></i> -->
+                    <mat-label>MM/DD/YYYY</mat-label>
+                    <input matInput [matDatepicker]="picker2" [(ngModel)]="objquest.valid_till" [disabled]="dispflag"  name="valid_till">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">&nbsp;</label>
+                <button *ngIf="flag==true" type="button" (click)="oncreate()" mat-flat-button class="tagus">
+
+                  <span class="ri-file-add-line"></span>
+                  <!-- <span class="flaticon-add"></span> -->
+                  Add</button>
+
+
+                <button *ngIf="flag==false" type="button" (click)="onupdate()"  mat-flat-button class="tagus">
+
+                  <span class="ri-file-add-line"></span>
+                  <!-- <span class="flaticon-add"></span> -->
+                  Update</button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <button type="button" (click)="close()" mat-raised-button class="gray">
+                  <!-- <span class="flaticon-close"></span> -->
+                  Close</button>
+                <!-- <button *ngIf="flag==true" type="reset" mat-flat-button color="warn">
+                  <span class="ri-format-clear"></span>
+                  Clear</button> -->
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </mat-card-content>
+      </mat-card>
+      </div>
+
+      <div *ngIf="detail" class="mb-25 personal-info-card tagus-card">
+        <div class="title d-flex align-items-center justify-content-space-between drowerheader">
+          <h5>Question Paper Set Details</h5>
+          <button class="close-btn bg-transparent p-0 border-none align-items-end" style="cursor: pointer;"
+            (click)="close()"><i class="flaticon-close"></i></button>
+        </div>
+
+
+        <mat-card class="mb-25 personal-info-card tagus-card">
+          <mat-card-header class="title d-flex align-items-center justify-content-space-between ">
+
+
+          </mat-card-header>
+          <mat-card-content>
+
+            <ul class="list ps-0 mb-0">
+              <li>
+                <span class="fw-semibold d-inline-block">Question ID:</span>
+                <span class="gray-color">{{objquest.index_id}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Assessment Mode Name:</span>
+                <span class="gray-color">{{objquest.assessment_mode}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Paper Set Name:</span>
+                <span class="gray-color">{{objquest.paper_set_name}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Job Role Name:</span>
+                <span class="gray-color">{{objquest.job_role_name}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Sector Name:</span>
+                <span class="gray-color">{{objquest.sector_name}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Assessment Type:</span>
+                <span class="gray-color">{{objquest.assessment_type}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Valid Till :</span>
+                <span class="gray-color">{{objquest.valid_till}}</span>
+              </li>
+
+
+              <br>
+              <br>
+              <br>
+              <br>
+
+              <!-- <li>
+                <span class="d-block fw-semibold mb-5">Total Practicle Marks:</span>
+                <span class="gray-color">{{objnos.total_theory}}</span>
+              </li> -->
+              <li>
+                <button type="button" (click)="close()" mat-raised-button class="gray">
+                  <i class="flaticon-close"></i>
+                  Close</button>
+              </li>
+
+            </ul>
+
+          </mat-card-content>
+
+        </mat-card>
+      </div>
+      </mat-drawer>
+
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Manage Question Sets</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Manage Question Sets</li>
+  </ol>
+</div>
+<!-- form start  -->
+
+
+
+ <!-- Aggrid view data -->
+ <mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h3 class="mb-0">Question Paper set List</h3>
+
+    <mat-form-field>
+
+      <mat-label><span class="ri-search-line"></span>&nbsp;&nbsp;Enter Keyword to Filter data </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #name />
+
+    </mat-form-field>
+    <!-- <button type="button" mat-flat-button class="tagus fw-semibold " >
+        <i class="flaticon-add"></i>
+          Add Country
+      </button> -->
+      <button mat-flat-button class="default-btn tagus" (click)="openDrawer()">
+        <i class="ri-add-fill"></i> Add
+      </button>
+
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+      <table mat-table [dataSource]="datasource" class="tablegrid">
+
+
+                <ng-container matColumnDef="assessment_mode">
+                  <th mat-header-cell *matHeaderCellDef>Assignmode</th>
+                  <td mat-cell *matCellDef="let element">{{element.assessment_mode}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="sector_name">
+                  <th mat-header-cell *matHeaderCellDef>Sector name</th>
+                  <td mat-cell *matCellDef="let element">{{element.sector_name}}</td>
+              </ng-container>
+              <ng-container matColumnDef="job_role_name">
+                <th mat-header-cell *matHeaderCellDef>Job Role Name</th>
+                <td mat-cell *matCellDef="let element">{{element.job_role_name}}</td>
+            </ng-container>
+
+               <ng-container matColumnDef="assessment_type">
+                  <th mat-header-cell *matHeaderCellDef>Assessment Type</th>
+                  <td mat-cell *matCellDef="let element">{{element.assessment_type}}</td>
+              </ng-container>
+              <ng-container matColumnDef="paper_set_name">
+                <th mat-header-cell *matHeaderCellDef>Paper Set Name</th>
+                <td mat-cell *matCellDef="let element">{{element.paper_set_name}}</td>
+            </ng-container>
+
+                <ng-container matColumnDef="valid_till">
+                  <th mat-header-cell *matHeaderCellDef>Validity</th>
+                  <td mat-cell *matCellDef="let element">{{element.valid_till}}</td>
+              </ng-container>
+
+
+        <!-- Vendor Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.status=='Active'">
+              <span class="badge">{{element.status}}</span>
+              </span>
+              <span *ngIf="element.status=='Deactivated'">
+                <span class="badge inactive">{{element.status}}</span>
+                </span>
+            <!-- <span class="badge text-bg-danger" *ngIf="element.status.Deactivated">
+                        {{element.status}}
+                      </span> -->
+            <!-- <span class="badge text-bg-success" *ngIf="element.status.Active">{{element.status}}</span>
+                         <span class="badge text-bg-danger" *ngIf="element.status.deactive">{{element.status}}</span> -->
+            <!-- <span class="badge " *ngIf="element.status">{{element.status}}</span> -->
+            <!-- toggle start -->
+            <!-- <form class="example-form" [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)" ngNativeValidate> -->
+            <!-- <mat-slide-toggle formControlName="enableWifi">Enable Wifi</mat-slide-toggle> -->
+            <!-- <mat-slide-toggle id="tog" (toggleChange)="myfun(element.country_id)" formControlName="acceptTerms"></mat-slide-toggle> -->
+            <!-- <p class="mt-10">Form Group Status: {{formGroup.status}}</p> -->
+            <!-- <button mat-raised-button type="submit">Save Settings</button> -->
+            <!-- </form> -->
+            <!-- toggle end -->
+
+          </td>
+
+
+        </ng-container>
+
+        <!-- Date Column -->
+        <!-- <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                </ng-container> -->
+
+
+        <!-- Rating Column -->
+        <!-- <ng-container matColumnDef="rating">
+                    <th mat-header-cell *matHeaderCellDef>Rating</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span>{{element.rating.star}}</span>
+                        {{element.rating.overall}}
+                    </td>
+                </ng-container> -->
+        <!-- Status Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle [checked]="element.status === 'Active'" (change)="statusfun(element)">
+            </mat-slide-toggle>
+            <button mat-icon-button color="tagus" (click)="setintro(element.id)" matTooltip="Create Instructions" matTooltipPosition="above">
+              <mat-icon>note_add</mat-icon> </button>
+            <button mat-icon-button color="primary" (click)="update(element)"matTooltip="Update Record" matTooltipPosition="above">
+
+              <mat-icon>edit</mat-icon>
+            </button>
+            <!-- <button mat-icon-button color="warn" (click)="deletefun(element)">
+              <mat-icon>delete</mat-icon>
+            </button> -->
+            <button mat-icon-button color="tagus" (click)="details(element)" matTooltip="Show Details" matTooltipPosition="above">
+
+              <mat-icon>info</mat-icon>
+
+            </button>
+
+          </td>
+          |
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <div class="col-lg-12 col-md-12">
+      <mat-card class="mb-25 tagus-card">
+
+        <mat-card-content>
+          <mat-paginator [length]="300" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons
+            aria-label="Select page">
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <mat-paginator [pageSizeOptions]="[10,50,100, 200, 300]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+</mat-paginator> -->
+  </mat-card-content>
+</mat-card>
+<!-- Aggriddata end -->

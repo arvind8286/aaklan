@@ -1,0 +1,152 @@
+.textwrap
+{
+
+  word-wrap: break-word !important;
+  min-width: 100px !important;
+
+}
+.wrap-text {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  max-width: 200px !important; /* Adjust as needed */
+  padding: 8px !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+.tablegrid
+{
+
+  td{
+    padding: 5px !important;
+    text-align: left !important;
+    // border: 1px solid #ccc;
+
+  }
+  th
+  {
+    padding: 5px !important;
+    // background-color:blueviolet;
+    text-align: left !important;
+  }
+}
+
+.dial
+{
+  float: left;
+  // border: 1px solid #B1B5C3;
+  border-radius: 0 0px 10px 10px !important;
+  padding: 0 !important;
+  width: 30%;
+  margin-right:0!important;
+}
+.contact
+{
+  float: left;
+
+  // border: 1px solid #B1B5C3;
+  border-radius: 10px 10px 0 0 !important;
+  // padding: 0 5px 0 5px !important;
+  padding: 0 !important;
+  width: 70%;
+  margin-right:0!important;
+
+}
+.customgroup
+{
+  // border: 1px solid #B1B5C3 !important;
+  padding: 0 !important;
+}
+
+.personal-info-card {
+  p {
+      font-size: 14px;
+  }
+  .list {
+      list-style-type: none;
+      margin-top: 20px;
+
+      li {
+          font-size: 14px;
+          border-bottom: 1px solid #F7FAFF;
+          padding: {
+              top: 11px;
+              bottom: 11px;
+          };
+          span {
+              &:nth-child(1) {
+                  width: 115px;
+              }
+          }
+          &:first-child {
+              padding-top: 0;
+          }
+          &:last-child {
+              border-bottom: none;
+              padding-bottom: 0;
+          }
+      }
+  }
+  &.component-dark-theme {
+      .list {
+          li {
+              border-bottom-color: #1f2226;
+          }
+      }
+  }
+}
+
+@media only screen and (max-width : 767px) {
+
+  .personal-info-card {
+      p {
+          font-size: 13.5px;
+      }
+      .list {
+          margin-top: 15px;
+
+          li {
+              font-size: 13.5px;
+              padding: {
+                  top: 10px;
+                  bottom: 10px;
+              };
+              span {
+                  &:nth-child(1) {
+                      width: 90px;
+                  }
+              }
+          }
+      }
+  }
+
+}
+
+@media only screen and (min-width: 1600px) {
+
+  .personal-info-card {
+      p {
+          font-size: var(--fontSize);
+      }
+      .list {
+          li {
+              font-size: var(--fontSize);
+              padding: {
+                  top: 15px;
+                  bottom: 15px;
+              };
+              span {
+                  &:nth-child(1) {
+                      width: 150px;
+                  }
+              }
+          }
+      }
+  }
+
+}
+
+.drowerheader
+{
+  background-color: #C8CCF9 !important;
+  padding: 10px 20px !important;
+}

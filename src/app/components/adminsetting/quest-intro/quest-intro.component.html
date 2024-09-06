@@ -1,0 +1,83 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <button  type="button"  mat-flat-button class="tagus" (click)="backtomain()">
+
+    <span class="ri-home-8-line"></span>
+    <!-- <span class="flaticon-add"></span> -->
+    Back to List</button>
+  <h3 class="mb-0">Manage Instruction Page</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Manage Instruction Before Exam </li>
+  </ol>
+</div>
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h5 class="mb-0">Enter The Instruction For Test </h5>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+
+
+      <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Write Question Instruction Before Exam Start<span>*</span></label>
+            <div class="NgxEditor__Wrapper">
+
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+      <ngx-editor  [editor]="editor" id="instruct" [(ngModel)]="html" name="question" [placeholder]="'Type Question here ...'"></ngx-editor>
+
+            </div>
+
+            </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2>Page Preview</h2>
+          <div style="margin: 1rem 0; border: 1px solid black; white-space: pre-wrap;" [innerHtml]="html"></div>
+        </div>
+        <!-- <pre style="padding: 1rem; border: 1px solid black;">{{html}}</pre> -->
+      </div>
+      <br>
+
+      <br>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">&nbsp;</label>
+            <button *ngIf="flag==true" type="button" (click)="addinstruction()" [disabled]="dispflag" mat-flat-button class="tagus">
+
+              <span class="ri-file-add-line"></span>
+              <!-- <span class="flaticon-add"></span> -->
+              Add Instruction</button>
+
+
+            <!-- <button *ngIf="flag==false" type="button" (click)="onupdate()" mat-flat-button class="tagus">
+
+              <span class="ri-file-add-line"></span> -->
+              <!-- <span class="flaticon-add"></span> -->
+              <!-- Update</button> -->
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <!-- <button *ngIf="flag==true" type="reset" mat-flat-button [disabled]="dispflag" color="warn">
+              <span class="ri-format-clear"></span>
+              Clear</button> -->
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>

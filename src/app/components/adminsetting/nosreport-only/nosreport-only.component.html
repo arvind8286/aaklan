@@ -1,0 +1,117 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <button type="button" mat-flat-button class="tagus" (click)="backtostudentreport()">
+
+    <!-- <span class="flaticon-chevron-1"></span> -->
+    <i class="ri-arrow-left-line"></i>
+    Back to Student List</button>
+  <h3 class="mb-0">Candidate NOS Wise Report</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Candidate NOS Wise  Report</li>
+
+  </ol>
+</div>
+
+<!-- Aggrid view data -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h3 class="mb-0">Candidate NOS Wise  Report</h3>
+
+
+    <mat-form-field appearance="fill">
+
+      <mat-label><span class="ri-search-line"></span>&nbsp;&nbsp;Enter Keyword to Filter data </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #name />
+
+
+    </mat-form-field>
+    <!-- <button type="button" mat-flat-button class="tagus fw-semibold " >
+        <i class="flaticon-add"></i>
+          Add Country
+      </button> -->
+      <button type="button" mat-flat-button class="tagus" (click)="exportdata()">
+
+        <!-- <span class="flaticon-chevron-1"></span> -->
+
+        Export Excel</button>
+
+
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+      <table mat-table [dataSource]="datasource" >
+
+
+        <ng-container matColumnDef="nos_code">
+          <th mat-header-cell *matHeaderCellDef>NOS Code</th>
+          <td mat-cell *matCellDef="let element">{{element.nos_code}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="index_id">
+          <th mat-header-cell *matHeaderCellDef>NOS ID</th>
+          <td mat-cell *matCellDef="let element">{{element.index_id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nos_description">
+          <th mat-header-cell *matHeaderCellDef>NOS Discription</th>
+          <td mat-cell *matCellDef="let element">{{element.nos_description}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_theory">
+          <th mat-header-cell *matHeaderCellDef>Total Theory</th>
+          <td mat-cell *matCellDef="let element">{{element.total_theory}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_viva">
+          <th mat-header-cell *matHeaderCellDef>Total Viva </th>
+          <td mat-cell *matCellDef="let element">{{element.total_viva}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_practical">
+          <th mat-header-cell *matHeaderCellDef>Total Practical</th>
+          <td mat-cell *matCellDef="let element">{{element.total_practical}}</td>
+        </ng-container>
+        <ng-container matColumnDef="total_theory_marks_obtain">
+          <th mat-header-cell *matHeaderCellDef>Total Theory Marks Obtain</th>
+          <td mat-cell *matCellDef="let element">{{element.total_theory_marks_obtain}}</td>
+        </ng-container>
+        <ng-container matColumnDef="total_viva_marks_obtain">
+          <th mat-header-cell *matHeaderCellDef>Total viva Marks Obtain</th>
+          <td mat-cell *matCellDef="let element">{{element.total_viva_marks_obtain}}</td>
+        </ng-container>
+        <ng-container matColumnDef="total_practical_marks_obtain">
+          <th mat-header-cell *matHeaderCellDef>Total Practicle Marks Obtained</th>
+          <td mat-cell *matCellDef="let element">{{element.total_practical_marks_obtain}}</td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <div class="col-lg-12 col-md-12">
+      <mat-card class="mb-25 tagus-card">
+
+        <mat-card-content>
+          <mat-paginator [length]="300" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons
+            aria-label="Select page">
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <mat-paginator [pageSizeOptions]="[10,50,100, 200, 300]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+</mat-paginator> -->
+  </mat-card-content>
+</mat-card>
+<!-- Aggriddata end -->

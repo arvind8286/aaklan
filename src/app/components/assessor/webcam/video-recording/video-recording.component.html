@@ -1,0 +1,11 @@
+<div>
+  <video #videoElement autoplay></video>
+  <button id="b1"  mat-flat-button class="tagus me-25 btn-bg-danger end" color="warn" (click)="startRecording()" >startRecording</button>
+  <button id="b2"  mat-flat-button class="tagus me-25 btn-bg-danger end" color="warn" (click)="stopRecording()" >stopRecording</button>
+  <button id="b3"  mat-flat-button class="tagus me-25 btn-bg-danger end" color="warn" (click)="downloadRecording()" >downloadRecording</button>
+
+  <!-- <button (click)="startRecording()">Start Recording</button>
+  <button (click)="stopRecording()">Stop Recording</button>
+  <button (click)="downloadRecording()" *ngIf="recordedVideoUrl">Download Recording</button> -->
+  <video #playbackElement controls *ngIf="recordedVideoUrl"></video>
+</div>

@@ -1,0 +1,70 @@
+<mat-card class="mb-25 tagus-card" class="side-modal" [@slideInOut]="stateName">
+  <mat-card-header>
+      <h5 class="mb-0">Country Details</h5>
+
+  </mat-card-header>
+
+  <mat-card-content>
+      <form>
+          <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Enter Country <span>*</span></label>
+                      <mat-form-field appearance="fill">
+                          <i class="flaticon-worldwide"></i>
+                          <mat-label>Enter Country Name eg. INDIA</mat-label>
+                          <input matInput [(ngModel)]="objcontry.country_name" name="country_name">
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Enter Country Code <span>*</span> </label>
+                      <mat-form-field appearance="fill">
+                          <i class="flaticon-worldwide"></i>
+                          <mat-label>Enter Country Code eg. IND</mat-label>
+                          <input matInput [(ngModel)]="objcontry.country_code" name="country_code">
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Enter Dial No <span>*</span></label>
+                      <mat-form-field appearance="fill">
+                          <i class="flaticon-phone-call"></i>
+                          <mat-label>Enter Dial No eg. +91-</mat-label>
+                          <input  matInput [(ngModel)]="objcontry.dial" name="dial">
+                      </mat-form-field>
+                  </div>
+
+              </div>
+              <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+                <div class="tagus-form-group">
+
+                    <button  type="button" (click)="onCountrysave()" mat-flat-button class="tagus" >
+
+                      <span class="ri-file-add-line"></span>
+                          Save</button>
+
+
+                    <!-- <button  type="button"  (click)="onupdate()" mat-flat-button class="tagus" >
+
+                      <span class="ri-file-add-line"></span>
+                          Update</button> -->
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  <button  type="reset" mat-flat-button color="warn">
+                    <span class="ri-format-clear"></span>
+                    Clear</button>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </form>
+  </mat-card-content>
+</mat-card>

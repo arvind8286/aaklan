@@ -1,0 +1,103 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Capture Details</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Assessment</li>
+
+  </ol>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <!-- <h2 class="mb-0 badge text-bg-success">Welcome <span class="badge text-bg-warning"> {{sname}}</span></h2> -->
+    <h2 class="badge text-bg-danger">Please NOTE:</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+
+      <!-- <p>The maximum time alloted is <span class="badge text-bg-info">60 Min</span> ,please read all instruction carefully before attempting</p> -->
+      <div class="row">
+        <div class="col">
+          <ol>
+          <b> <li>Try to take a clear picture with your face clearly visible on camera,take a CLOSE UP picture.</li></b>
+            <b><li>Please make sure that there is no special object like,<span class="badge text-bg-info"> mobile phone </span>, <span class="badge text-bg-info"> table </span>, or any <span class="badge text-bg-info">  Reading Material </span> present in photo.</li></b>
+            <b><li> <span class="badge text-bg-info"> Multiple persons</span> should not be present in photo. </li></b>
+            <b><li>Yoy will not be allowed to take assessment,if any malpractice is observed while starting the Assessment.</li></b>
+            <b><li>if you dont have a WEBCAM,just press the continue button.</li></b>
+
+          </ol>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="row">
+
+
+          <div class="col-lg-4 col-md-4 col-sm-12">
+
+            <webcam *ngIf="stream" [height]="250" [trigger]="$trigger" (imageCapture)="snapshort($event)"></webcam>
+            <button  mat-flat-button class="tagus" (click)="startCamera()" >Start Camera</button>&nbsp;&nbsp;<button  mat-flat-button class="tagus" (click)="capture()" >Capture</button>
+
+
+            <!-- <video class="img-fluid" #videoElement [hidden]="false" height="250"  autoplay></video> -->
+          </div>
+
+
+          <div class="col-lg-4 col-md-4 col-sm-12 ">
+        <br><br/>
+
+
+          </div>
+
+
+
+
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <!-- <canvas [hidden]="false" class="img-fluid" #canvasElement height="350" ></canvas> -->
+         <div *ngIf="previewimg">
+        <img [src]="previewimg" alt="" height="250px">
+      </div>
+       </div>
+
+      </div>
+    <div class="row">
+      <div class="col">
+
+        <mat-card class="mb-25 tagus-card">
+          <mat-card-header>
+              <h5 class="mb-0">Uload image</h5>
+          </mat-card-header>
+          <mat-card-content>
+              <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label class="fw-semibold">Drop Image here or click to upload.</ngx-dropzone-label>
+                  <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+          </mat-card-content>
+      </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div class="row ">
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <button  mat-flat-button class="tagus " (click)="uploadfile()" >Upload Documents</button>
+
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <button  *ngIf="flag" mat-flat-button class="tagus "  (click)="pretest()">Continue</button>
+
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>

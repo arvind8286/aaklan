@@ -1,0 +1,434 @@
+<mat-drawer #drawer mode='over' position="end">
+  <div *ngIf="detail==false" class="mb-25 personal-info-card tagus-card">
+    <div class="title d-flex align-items-center justify-content-space-between drowerheader">
+      <h5>{{ flag ? 'Add NOS ' : 'Edit NOS' }}</h5>
+      <button class="close-btn bg-transparent p-0 border-none align-items-end" style="cursor: pointer;"
+        (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <form>
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Assesment Mode <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-file-paper-2-line"></i>
+                  <mat-label>Select Assign mode</mat-label>
+                  <mat-select   name="assignmode" [(ngModel)]="objnos.assessment_mode" [disabled]="true">
+                    <mat-option value="Online">Online</mat-option>
+                    <mat-option value="Offline">Offline</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Select Sector Name <span>*</span> </label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-git-branch-line"></i>
+                  <mat-label>Select sector</mat-label>
+                  <mat-select   name="sector" [(ngModel)]="objnos.sector_id" (selectionChange)="getalljobrole()" [disabled]="dispflag">
+                    <mat-option value="" disabled>Select a Sector</mat-option>
+                   <mat-option *ngFor="let item of secotorList|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.sector_name}}</mat-option>
+
+                </mat-select>
+
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Select Job Role name <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-briefcase-line"></i>
+                  <mat-label>Select Job Role name</mat-label>
+                  <mat-select   name="jobrole" [(ngModel)]="objnos.job_role_id"  [disabled]="dispflag">
+                    <mat-option value="" disabled>Select a Jobrole</mat-option>
+                    <mat-option *ngFor="let item of jobroleList|statusFilter:'Active'" [value]="item.id">{{item.index_id}}-{{item.job_role_name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+                  </div>
+          <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">NOS Code<span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-briefcase-line"></i>
+
+                  <mat-label>Enter NOS Code</mat-label>
+                  <input matInput  name="Noscode" [(ngModel)]="objnos.nos_code" [disabled]="dispflag">
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">NOS Discription<span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-file-paper-2-line"></i>
+                  <mat-label>Enter NOS Discription</mat-label>
+                  <textarea matInput name="NOSdisp"  [(ngModel)]="objnos.nos_description" [disabled]="dispflag"></textarea>
+                  <!-- <input matInput  name="NOSdisp" [(ngModel)]="objnos.nos_description" [disabled]="dispflag"> -->
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Select NOS Type <span></span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-git-branch-line"></i>
+                  <mat-label>Select NOS Type </mat-label>
+                  <mat-select   name="Nostype" [(ngModel)]="objnos.nos_type" [disabled]="dispflag">
+                   <mat-option value="core NOS">Core NOS</mat-option>
+                   <mat-option value="Non Core NOS">Non Core NOS</mat-option>
+
+                </mat-select>
+
+                </mat-form-field>
+
+                </div>
+            </div>
+
+
+          </div>
+          <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Total Theory Marks <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-line-chart-line"></i>
+                  <mat-label>Enter Theory Total Marks</mat-label>
+                  <input matInput appDecimalNumber  name="totalTMarks" [(ngModel)]="objnos.total_theory" [disabled]="dispflag">
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Total Viva Marks  <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-file-paper-2-line"></i>
+                  <mat-label>Total viva Marks </mat-label>
+                  <input matInput appDecimalNumber  name="ttlvivamarks" [(ngModel)]="objnos.total_viva" [disabled]="dispflag">
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Total Practical Marks  <span>*</span></label>
+                <mat-form-field appearance="fill">
+                  <i class="ri-file-paper-2-line"></i>
+                  <mat-label>Total Practical Marks </mat-label>
+                  <input matInput appDecimalNumber  name="ttlpracticle" [(ngModel)]="objnos.total_practical" [disabled]="dispflag">
+                </mat-form-field>
+                </div>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">&nbsp;</label>
+                <button *ngIf="flag==true" type="button" (click)="oncreate()" mat-flat-button class="tagus" [disabled]="dispflag">
+
+                  <span class="ri-file-add-line"></span>
+                  <!-- <span class="flaticon-add"></span> -->
+                  Add</button>
+
+
+                <button *ngIf="flag==false" type="button" (click)="onupdate()" mat-flat-button class="tagus" [disabled]="dispflag">
+
+                  <span class="ri-file-add-line"></span>
+                  <!-- <span class="flaticon-add"></span> -->
+                  Update</button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <button  type="button" (click)="close()" mat-raised-button class="gray">
+                  <!-- <span class="flaticon-close"></span> -->
+                  Close</button>
+                <!-- <button *ngIf="flag==true" type="reset" mat-flat-button color="warn" [disabled]="dispflag">
+                  <span class="ri-format-clear"></span>
+                  Clear</button> -->
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </mat-card-content>
+      </mat-card>
+      </div>
+
+      <div *ngIf="detail" class="mb-25 personal-info-card tagus-card">
+        <div class="title d-flex align-items-center justify-content-space-between drowerheader">
+          <h5>NOS Details</h5>
+          <button class="close-btn bg-transparent p-0 border-none align-items-end" style="cursor: pointer;"
+            (click)="close()"><i class="flaticon-close"></i></button>
+        </div>
+
+
+        <mat-card class="mb-25 personal-info-card tagus-card">
+          <mat-card-header class="title d-flex align-items-center justify-content-space-between ">
+
+
+          </mat-card-header>
+          <mat-card-content>
+
+            <ul class="list ps-0 mb-0">
+              <li>
+                <span class="fw-semibold d-inline-block">NOS ID:</span>
+                <span class="gray-color">{{objnos.index_id}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">NOS Code:</span>
+                <span class="gray-color">{{objnos.nos_code}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Sector Name:</span>
+                <span class="gray-color">{{objnos.sector_name}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Assign Mode:</span>
+                <span class="gray-color">{{objnos.assessment_mode}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">NOS Description:</span>
+                <span class="gray-color">{{objnos.nos_description}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">NOS Type:</span>
+                <span class="gray-color">{{objnos.nos_type}}</span>
+              </li>
+              <li>
+                <span class="fw-semibold d-inline-block">Job Role:</span>
+                <span class="gray-color">{{objnos.job_role}}</span>
+              </li>
+              <li>
+                <span class="d-block fw-semibold mb-5">Total Theory Marks:</span>
+                <span class="gray-color">{{objnos.total_theory}}</span>
+              </li>
+              <li>
+                <span class="d-block fw-semibold mb-5">Total Viva Marks:</span>
+                <span class="gray-color">{{objnos.total_viva}}</span>
+              </li>
+              <!-- <li>
+                <span class="d-block fw-semibold mb-5">Total Practicle Marks:</span>
+                <span class="gray-color">{{objnos.total_theory}}</span>
+              </li> -->
+              <li>
+                <button type="button" (click)="close()" mat-raised-button class="gray">
+                  <i class="flaticon-close"></i>
+                  Close</button>
+              </li>
+
+            </ul>
+
+          </mat-card-content>
+
+        </mat-card>
+      </div>
+      </mat-drawer>
+
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Manage NOS </h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Manage NOS </li>
+  </ol>
+</div>
+<!-- form start  -->
+<!-- <mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h5 class="mb-0">Manage NOS Details</h5>
+  </mat-card-header>
+
+</mat-card> -->
+
+<!-- Aggrid view data -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h3 class="mb-0">NOS  List</h3>
+
+    <mat-form-field>
+
+      <mat-label><span class="ri-search-line"></span>&nbsp;&nbsp;Enter Keyword to Filter data </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #name />
+
+    </mat-form-field>
+    <!-- <button type="button" mat-flat-button class="tagus fw-semibold " >
+        <i class="flaticon-add"></i>
+          Add Country
+      </button> -->
+      <button mat-flat-button class="default-btn tagus" (click)="openDrawer()">
+        <i class="ri-add-fill"></i> Add
+      </button>
+
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+      <table mat-table [dataSource]="datasource" class="tablegrid">
+
+
+                <ng-container matColumnDef="assessment_mode">
+                  <th mat-header-cell *matHeaderCellDef>Assessment Mode</th>
+                  <td mat-cell *matCellDef="let element">{{element.assessment_mode}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="sector_name">
+                  <th mat-header-cell *matHeaderCellDef>Sector Name</th>
+                  <td mat-cell *matCellDef="let element" class="wrap-text">{{element.sector_name}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="job_role">
+                  <th mat-header-cell *matHeaderCellDef>Job Role</th>
+                  <td mat-cell *matCellDef="let element" class="wrap-text">{{element.job_role}}</td>
+              </ng-container>
+
+
+
+                <ng-container matColumnDef="nos_code">
+                  <th mat-header-cell *matHeaderCellDef>NOS Code</th>
+                  <td mat-cell *matCellDef="let element">{{element.nos_code}}</td>
+              </ng-container>
+              <ng-container matColumnDef="nos_type">
+                <th mat-header-cell *matHeaderCellDef>NOS Type</th>
+                <td mat-cell *matCellDef="let element">{{element.nos_type}}</td>
+            </ng-container>
+
+                <ng-container matColumnDef="nos_description">
+                  <th mat-header-cell *matHeaderCellDef>NOS Description</th>
+                  <td mat-cell *matCellDef="let element">{{element.nos_description}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="total_theory">
+                  <th mat-header-cell *matHeaderCellDef>Total Theory Marks</th>
+                  <td mat-cell *matCellDef="let element">{{element.total_theory}}</td>
+              </ng-container>
+              <ng-container matColumnDef="total_viva">
+                <th mat-header-cell *matHeaderCellDef>Total Viva Marks</th>
+                <td mat-cell *matCellDef="let element">{{element.total_viva}}</td>
+            </ng-container>
+            <ng-container matColumnDef="total_practical">
+              <th mat-header-cell *matHeaderCellDef>Total Practical Marks</th>
+              <td mat-cell *matCellDef="let element">{{element.total_practical}}</td>
+          </ng-container>
+            <ng-container matColumnDef="index_id">
+              <th mat-header-cell *matHeaderCellDef>NOS ID</th>
+              <td mat-cell *matCellDef="let element">{{element.index_id}}</td>
+          </ng-container>
+
+
+
+        <!-- Vendor Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.status=='Active'">
+              <span class="badge ">{{element.status}}</span>
+              </span>
+              <span *ngIf="element.status=='Deactivated'">
+                <span class="badge inactive">{{element.status}}</span>
+                </span>
+            <!-- <span class="badge text-bg-danger" *ngIf="element.status.Deactivated">
+                        {{element.status}}
+                      </span> -->
+            <!-- <span class="badge text-bg-success" *ngIf="element.status.Active">{{element.status}}</span>
+                         <span class="badge text-bg-danger" *ngIf="element.status.deactive">{{element.status}}</span> -->
+            <!-- <span class="badge " *ngIf="element.status">{{element.status}}</span> -->
+            <!-- toggle start -->
+            <!-- <form class="example-form" [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)" ngNativeValidate> -->
+            <!-- <mat-slide-toggle formControlName="enableWifi">Enable Wifi</mat-slide-toggle> -->
+            <!-- <mat-slide-toggle id="tog" (toggleChange)="myfun(element.country_id)" formControlName="acceptTerms"></mat-slide-toggle> -->
+            <!-- <p class="mt-10">Form Group Status: {{formGroup.status}}</p> -->
+            <!-- <button mat-raised-button type="submit">Save Settings</button> -->
+            <!-- </form> -->
+            <!-- toggle end -->
+
+          </td>
+
+
+        </ng-container>
+
+        <!-- Date Column -->
+        <!-- <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                </ng-container> -->
+
+
+        <!-- Rating Column -->
+        <!-- <ng-container matColumnDef="rating">
+                    <th mat-header-cell *matHeaderCellDef>Rating</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span>{{element.rating.star}}</span>
+                        {{element.rating.overall}}
+                    </td>
+                </ng-container> -->
+        <!-- Status Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element" class="wrap-text">
+            <mat-slide-toggle [checked]="element.status === 'Active'" (change)="statusfun(element)" matTooltip="Acticate/Deactivate" matTooltipPosition="above">
+            </mat-slide-toggle>
+
+            <button mat-icon-button color="primary" (click)="update(element)" matTooltip="Update Record" matTooltipPosition="above">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deletefun(element)" matTooltip="Delete Record" matTooltipPosition="above">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="tagus" (click)="details(element)" matTooltip="Show Details" matTooltipPosition="above">
+              <mat-icon>info</mat-icon>
+
+            </button>
+
+          </td>
+          |
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <div class="col-lg-12 col-md-12">
+      <mat-card class="mb-25 tagus-card">
+
+        <mat-card-content>
+          <mat-paginator [length]=""
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              showFirstLastButtons
+              aria-label="Select page"
+              (page)="onPageChange($event.pageIndex + 1)">
+          </mat-paginator>
+      </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <mat-paginator [pageSizeOptions]="[10,50,100, 200, 300]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+</mat-paginator> -->
+  </mat-card-content>
+</mat-card>
+<!-- Aggriddata end -->
+

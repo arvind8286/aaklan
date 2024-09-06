@@ -1,0 +1,309 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Create Evidence</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Create Evidence </li>
+  </ol>
+</div>
+
+
+<!-- form start  -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h5 class="mb-0">Evidence Details </h5>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Parent Category <span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-file-paper-2-line"></i>
+              <mat-label>Select Parent Category</mat-label>
+              <mat-select [(ngModel)]="objcrtedv.parent_category" [disabled]="dispflag"  name="parent_category">
+                <mat-option value="Viva">Viva</mat-option>
+                <mat-option value="Theory">Theory</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Evidence Name <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Evidence Name</mat-label>
+              <input matInput [(ngModel)]="objcrtedv.evidence_name" [disabled]="dispflag" name="evidence_name">
+
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Evidence Description <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Evidence Description</mat-label>
+              <input matInput [(ngModel)]="objcrtedv.evidence_description" [disabled]="dispflag" name="evidence_description">
+
+
+            </mat-form-field>
+          </div>
+
+        </div>
+              </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Batch Type<span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-briefcase-line"></i>
+
+              <mat-label>Select Batch Type </mat-label>
+
+              <mat-select matInput [(ngModel)]="objcrtedv.batch_type" [disabled]="dispflag" name="batch_type">
+                <mat-option value="online">Online</mat-option>
+                <mat-option value="offline">Offline</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Min Images <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Min Images</mat-label>
+              <input type="number" appDecimalNumber  matInput [(ngModel)]="objcrtedv.min_images" [disabled]="dispflag" name="min_images">
+
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Max Images <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Max Images</mat-label>
+              <input type="number" appDecimalNumber matInput [(ngModel)]="objcrtedv.max_images" [disabled]="dispflag" name="max_images">
+
+
+            </mat-form-field>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="row">
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Min Videos<span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Min Videos</mat-label>
+              <input type="number" appDecimalNumber matInput [(ngModel)]="objcrtedv.min_videos" [disabled]="dispflag" name="min_videos">
+
+
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Max Videos <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Max Videos</mat-label>
+              <input type="number" appDecimalNumber matInput [(ngModel)]="objcrtedv.max_videos" [disabled]="dispflag" name="max_videos">
+
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Video Duration in minute<span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Enter Video Duration</mat-label>
+              <input type="number" appDecimalNumber matInput [(ngModel)]="objcrtedv.video_duration" [disabled]="dispflag" name="video_duration">
+
+
+            </mat-form-field>
+          </div>
+        </div>
+
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">&nbsp;</label>
+            <button *ngIf="flag==true" type="button" (click)="oncreate()" [disabled]="dispflag" mat-flat-button class="tagus">
+
+              <span class="ri-file-add-line"></span>
+              <!-- <span class="flaticon-add"></span> -->
+              Add</button>
+
+
+            <button *ngIf="flag==false" type="button" (click)="onupdate()" mat-flat-button class="tagus">
+
+              <span class="ri-file-add-line"></span>
+              <!-- <span class="flaticon-add"></span> -->
+              Update</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button *ngIf="flag==true" type="reset" mat-flat-button [disabled]="dispflag" color="warn">
+              <span class="ri-format-clear"></span>
+              Clear</button>
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
+<!-- Aggrid view data -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h3 class="mb-0">Manage Training Partner</h3>
+
+    <mat-form-field>
+
+      <mat-label><span class="ri-search-line"></span>&nbsp;&nbsp;Enter Keyword to Filter data </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #name  />
+
+    </mat-form-field>
+    <!-- <button type="button" mat-flat-button class="tagus fw-semibold " >
+        <i class="flaticon-add"></i>
+          Add Country
+      </button> -->
+
+
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+      <table mat-table [dataSource]="datasource">
+
+
+                <ng-container matColumnDef="parent_category">
+                  <th mat-header-cell *matHeaderCellDef>Parent Category</th>
+                  <td mat-cell *matCellDef="let element">{{element.parent_category}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="evidence_name">
+                  <th mat-header-cell *matHeaderCellDef>Evidence Name</th>
+                  <td mat-cell *matCellDef="let element">{{element.evidence_name}}</td>
+              </ng-container>
+              <ng-container matColumnDef="batch_type">
+                <th mat-header-cell *matHeaderCellDef>Batch Types</th>
+                <td mat-cell *matCellDef="let element">{{element.batch_type}}</td>
+            </ng-container>
+              <ng-container matColumnDef="min_images">
+                <th mat-header-cell *matHeaderCellDef>Min Images</th>
+                <td mat-cell *matCellDef="let element">{{element.min_images}}</td>
+            </ng-container>
+
+               <ng-container matColumnDef="max_images">
+                  <th mat-header-cell *matHeaderCellDef>Max Images</th>
+                  <td mat-cell *matCellDef="let element">{{element.max_images}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="min_videos">
+                  <th mat-header-cell *matHeaderCellDef>Min Videos</th>
+                  <td mat-cell *matCellDef="let element">{{element.min_videos}}</td>
+              </ng-container>
+              <ng-container matColumnDef="max_videos">
+                <th mat-header-cell *matHeaderCellDef>Max Videos </th>
+                <td mat-cell *matCellDef="let element">{{element.max_videos}}</td>
+            </ng-container>
+            <ng-container matColumnDef="video_duration">
+              <th mat-header-cell *matHeaderCellDef>Video Duration </th>
+              <td mat-cell *matCellDef="let element">{{element.video_duration}}</td>
+          </ng-container>
+
+
+        <!-- Vendor Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.status=='Active'">
+              <span class="badge">{{element.status}}</span>
+              </span>
+              <span *ngIf="element.status=='Deactivated'">
+                <span class="badge inactive">{{element.status}}</span>
+                </span>
+
+
+          </td>
+
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle [checked]="element.status === 'Active'" (change)="statusfun(element)" matTooltip="Acticate/Deactivate" matTooltipPosition="above">
+            </mat-slide-toggle>
+
+            <button mat-icon-button color="primary" (click)="update(element)" matTooltip="Update Record" matTooltipPosition="above">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deletefun(element)" matTooltip="Delete Record" matTooltipPosition="above">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="tagus" (click)="details(element)" matTooltip="Show Details" matTooltipPosition="above">
+              <mat-icon>info</mat-icon>
+
+            </button>
+
+          </td>
+          |
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <div class="col-lg-12 col-md-12">
+      <mat-card class="mb-25 tagus-card">
+
+        <mat-card-content>
+          <mat-paginator [length]="300" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons
+            aria-label="Select page">
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <mat-paginator [pageSizeOptions]="[10,50,100, 200, 300]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+</mat-paginator> -->
+  </mat-card-content>
+</mat-card>
+<!-- Aggriddata end -->
+
+
+

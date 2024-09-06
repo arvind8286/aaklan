@@ -1,0 +1,201 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Manage Report</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Candidate Wise Report Data</li>
+  </ol>
+</div>
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h5 class="mb-0">Candidate Wise Report Data </h5>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select Batch Name <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Select Batch</mat-label>
+              <mat-select [(ngModel)]="objbatch.id"   name="sector" (selectionChange)="reulstwisedisp()">
+               <mat-option *ngFor="let item of batchlist" [value]="item.id">{{item.batch_name}}</mat-option>
+
+            </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12">
+          <button type="button" mat-flat-button class="tagus" (click)="exportdata()">
+
+
+
+            Download Excel File</button>
+        </div> -->
+
+              </div>
+
+
+
+
+      <br>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- bootstrap table  -->
+ <mat-card>
+  <mat-card-header>
+    <h3 class="mb-4">Candidates Marks Table</h3>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container mt-5">
+
+      <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark tableheader">
+          <tr>
+            <th style="min-width:200px !important;">Action</th>
+            <th>Student Name</th>
+            <th>Batch Name</th>
+            <th>Enrollment Number</th>
+            <th colspan="3">Theory</th>
+            <th colspan="3">Viva</th>
+            <th colspan="3">Practical</th>
+            <!-- <th colspan="3">Total</th> -->
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Total Marks</th>
+            <th>Marks Obtain</th>
+            <th>No. of Ques</th>
+            <th>Total Marks</th>
+            <th>Marks Obtain</th>
+            <th>No. of Ques</th>
+            <th>Total Marks</th>
+            <th>Marks Obtain</th>
+            <!-- <th>No. of Ques</th>
+            <th>Total Marks</th>
+            <th>Marks Obtain</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidate of resultdata">
+            <td>
+              <!-- <button mat-menu-item (click)="noswisereport(candidate.batch_id,candidate.student_id)" type="button" class="bg-transparent border-none position-relative">
+              Question wise Report
+          </button> -->
+          <button mat-icon-button color="primary" (click)="noswisereport(candidate.batch_id,candidate.student_id)" matTooltip="Question Wise Report" matTooltipPosition="above">
+            <mat-icon>assignment</mat-icon>
+          </button> &nbsp;&nbsp;
+          <button mat-icon-button color="primary" (click)="get_evidanve(candidate.batch_id,candidate.student_id)" matTooltip="Get Evidence" matTooltipPosition="above">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="get_NOS_REPORT(candidate.batch_id,candidate.student_id)" matTooltip="NOS Wise Report" matTooltipPosition="above">
+            <mat-icon>assessment</mat-icon>
+          </button>
+
+        </td>
+            <td>{{ candidate.name |capitalize }} {{ candidate.middle_name|capitalize }} {{ candidate.surname|capitalize }}</td>
+            <td>{{ candidate.batch_name|capitalize }}</td>
+            <td>{{ candidate.enrollment_number |capitalize }}</td>
+            <td>{{ candidate.theory.no_of_questions }}</td>
+            <td>{{ candidate.theory.total_marks }}</td>
+            <td>{{ candidate.theory.marks_obtain }}</td>
+            <td>{{ candidate.viva.no_of_questions }}</td>
+            <td>{{ candidate.viva.total_marks }}</td>
+            <td>{{ candidate.viva.marks_obtain }}</td>
+            <td>{{ candidate.practical.no_of_questions }}</td>
+            <td>{{ candidate.practical.total_marks }}</td>
+            <td>{{ candidate.practical.marks_obtain }}</td>
+            <!-- <td>{{ candidate.theory.no_of_questions + candidate.viva.no_of_questions + candidate.practical.no_of_questions }}</td>
+            <td>{{ candidate.theory.total_marks }}+{{ candidate.viva.total_marks }}+{{ candidate.practical.total_marks }}</td>
+            <td>{{ candidate.theory.marks_obtain }}+{{ candidate.viva.marks_obtain }}+{{ candidate.practical.marks_obtain }}</td> -->
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </mat-card-content>
+ </mat-card>
+
+
+<!-- bootstrap table end -->
+
+<!-- custom list -->
+<!--
+<div *ngFor="let item of resultdata index as i" class="mb-25 col-sm-12">
+  <mat-card  class="mb-10 p-team-card tagus-card">
+      <mat-card-header>
+          <div>
+              <h5 class="mb-8">Name: {{item.name|capitalize}} {{item.middle_name|capitalize}} {{item.surname|capitalize}}</h5>
+              <p>Batch Name: {{item.batch_name |capitalize}} </p>
+          </div>
+          <div>
+            <button type="button" mat-button class="position-relative dot-btn p-0 border-none" [matMenuTriggerFor]="monthMenu">
+                <i class="ri-more-fill"></i>
+            </button>
+            <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
+                <button mat-menu-item (click)="noswisereport(item.batch_id,item.student_id)" type="button" class="bg-transparent border-none position-relative">
+                    Question wise Report
+                </button> -->
+                <!-- <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                  Evidance List
+                </button>
+                <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                    Batch Start
+                </button> -->
+            <!-- </mat-menu>
+        </div>
+      </mat-card-header>
+      <mat-card-content> -->
+
+          <!-- <div  class="info d-flex align-items-start justify-content-space-between">
+              <div>
+                <div class="title"><h5 class="mb-5">Enrollment Number</h5></div>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold"> {{item.enrollment_number}}</span></span>
+
+              </div>
+              <div>
+                <div class="title"><h5 class="mb-5">Theory Details </h5></div>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">No Of Questions :</span> {{item.theory.no_of_questions}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Total Marks :</span> {{item.theory.total_marks}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Marks Obtain  :</span> {{item.theory.marks_obtain}}</span>
+
+              </div>
+              <div>
+                <div class="title"><h5 class="mb-5">Viva Details </h5></div>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">No Of Questions :</span> {{item.viva.no_of_questions}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Total Marks :</span> {{item.viva.total_marks}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Marks Obtain  :</span> {{item.viva.marks_obtain}}</span>
+
+              </div>
+              <div>
+                <div class="title"><h5 class="mb-5">Practical Details </h5></div>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">No Of Questions :</span> {{item.practical.no_of_questions}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Total Marks :</span> {{item.practical.total_marks}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Marks Obtain  :</span> {{item.practical.marks_obtain}}</span>
+
+              </div>
+
+
+
+          </div>
+      </mat-card-content>
+  </mat-card>
+</div> -->
+
+  <!-- custom list end -->
+

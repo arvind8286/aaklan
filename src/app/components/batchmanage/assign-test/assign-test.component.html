@@ -1,0 +1,255 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <button  type="button"  mat-flat-button class="tagus" (click)="backtobatch()">
+
+    <span class="flaticon-chevron-1"></span>
+    <!-- <span class="flaticon-add"></span> -->
+    Back to Batch List</button><h3 class="mb-0">Manage Assign Test</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Admin Setting
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Assign Test </li>
+  </ol>
+</div>
+<!-- form start  -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+   <h5 class="mb-0">Manage Assign Test</h5>
+
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select Batch Name <span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-file-paper-2-line"></i>
+              <mat-label>Select Batch Name</mat-label>
+              <mat-select  [(ngModel)]="objassigntst.batch_id" (selectionChange)="onupdate()" name="btch">
+                <mat-option *ngFor="let item of fetchbatch" [value]="item.id">{{item.batch_name}}</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Assesment Mode<span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Select assessment mode </mat-label>
+              <mat-select  [(ngModel)]="objassigntst.assessment_mode" name="assessment_mode" disabled >
+                <mat-option value="Online">Online</mat-option>
+                <mat-option value="Offline">Offline</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Question Set Name <span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-file-paper-2-line"></i>
+              <mat-label>Select Question Set Name</mat-label>
+              <mat-select  [(ngModel)]="objassigntst.question_set_id" name="qstset">
+                <mat-option *ngFor="let item of questionsetlist" [value]="item.id">{{item.paper_set_name}}</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Test Type <span>*</span> </label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Select Test Type</mat-label>
+              <mat-select   name="testtype" [(ngModel)]="objassigntst.assessment_type" (selectionChange)="assmode()">
+                <!-- <mat-option *ngFor="let item of questionsetlist" [value]="item.assessment_type">{{item.assessment_type}}</mat-option> -->
+                <mat-option  value="Theory">Theory</mat-option>
+                <mat-option  value="Viva">Viva</mat-option>
+                <mat-option  value="Practical">Practical</mat-option>
+
+             </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+              </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Start Date <span>*</span></label>
+            <mat-form-field appearance="fill" class="date-input">
+              <!-- <i class="ri-git-branch-line"></i> -->
+                <mat-label>MM/DD/YYYY</mat-label>
+                <input matInput [matDatepicker]="picker2" [(ngModel)]="objassigntst.start_date"  name="start_date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Completion Date<span>*</span></label>
+
+            <!-- <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date" >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="fill" class="date-input">
+              <!-- <i class="ri-git-branch-line"></i> -->
+                <mat-label>MM/DD/YYYY</mat-label>
+                <input matInput [matDatepicker]="picker3" [(ngModel)]="objassigntst.end_date"  name="end_date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Test Duration (In MIN) <span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-briefcase-line"></i>
+
+              <mat-label>Enter Test duration</mat-label>
+              <input matInput  name="testduration" [(ngModel)]="objassigntst.test_duration">
+            </mat-form-field>
+            </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Start Time <span>*</span></label>
+            <mat-form-field appearance="fill" class="date-input">
+              <!-- <i class="ri-git-branch-line"></i> -->
+                <mat-label>HH/MM/SS</mat-label>
+                <input matInput type="time" [(ngModel)]="objassigntst.start_time"  name="start_time">
+                <!-- <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
+
+                <mat-datepicker #picker5></mat-datepicker> -->
+            </mat-form-field>
+
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Completion time<span>*</span></label>
+
+            <!-- <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date" >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="fill" class="date-input">
+              <!-- <i class="ri-git-branch-line"></i> -->
+                <mat-label>HH/MM/SS</mat-label>
+                <input matInput type="time" [(ngModel)]="objassigntst.end_time"  name="end_time">
+
+            </mat-form-field>
+            </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Select Assessor Name<span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i class="ri-git-branch-line"></i>
+              <mat-label>Select assessment mode </mat-label>
+              <mat-select   name="testmode" [(ngModel)]="objassigntst.assessor_id" multiple="true">
+                <mat-option *ngFor="let item of assessorList" [value]="item.id">{{item.first_name}}</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Candidate Can give this Test<span>*</span></label>
+            <!--  <mat-form-field appearance="fill">
+              <i class="ri-file-paper-2-line"></i>
+              <mat-label>Enter Payout Amount</mat-label>
+              <input matInput  name="Amount" [(ngModel)]="objassesor.payout_amount">
+            </mat-form-field> -->
+            <mat-checkbox class="example-margin" [checked]="cangivetst" [disabled]="dispflag" #cangv
+              (change)="cangivechkbox(cangv.checked)" name="chktechsport">(Yes/No)</mat-checkbox>
+
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">Mandetory to give all answer<span>*</span></label>
+
+            <mat-checkbox class="example-margin" [checked]="mandate" [disabled]="dispflag" #mandt
+              (change)="mandateall(mandt.checked)" name="chktechsport">(Yes/No)</mat-checkbox>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+          <div class="tagus-form-group">
+            <label class="d-block mb-12 fw-semibold gray-color">&nbsp;</label>
+            <button *ngIf="flag==true" type="button"  mat-flat-button class="tagus" (click)="oncreate()">
+
+              <span class="ri-file-add-line"></span>
+              <!-- <span class="flaticon-add"></span> -->
+              Add</button>
+
+
+            <button *ngIf="flag==false" type="button"  mat-flat-button class="tagus" (click)="onupdate()">
+
+              <span class="ri-file-add-line"></span>
+              <!-- <span class="flaticon-add"></span> -->
+              Update</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <!-- <button type="button" (click)="close()" mat-raised-button class="gray">
+               <span class="flaticon-close"></span>
+              Close</button>
+              &nbsp;
+              &nbsp;
+              &nbsp; -->
+            <button *ngIf="flag==true" type="reset" mat-flat-button color="warn">
+              <span class="ri-format-clear"></span>
+              Clear</button>
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
+<!-- custom list -->
+
+<!-- <div *ngIf="record==false" class="alert alert-info text-center" role="alert">
+ You have no any batches is Assigned
+</div> -->
+

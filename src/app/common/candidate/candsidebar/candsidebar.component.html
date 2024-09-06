@@ -1,0 +1,48 @@
+
+<div
+    class=" sidebar-area bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="true"
+
+>
+    <div class="logo" style="background-color: #000;" >
+      <!-- <div class="logo" style="background-color: #ffffff;" > -->
+        <a routerLink="#" class="d-flex align-items-center" >
+            <img src="assets/img/final_aaklan_logo.png" width="80%" alt="AAKALAN">
+            <!-- <img src="assets/img/final_aaklan_logo_drk.png" width="80%" alt="AAKALAN"> -->
+            <!-- <img src="assets/img/aak" alt="logo"> -->
+
+        </a>
+    </div>
+    <br>
+    <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+        <span class="top-bar"></span>
+        <span class="middle-bar"></span>
+        <span class="bottom-bar"></span>
+    </div>
+    <ng-scrollbar visibility="hover" style="height: 100vh;">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                  <span class="sub-title gray-color">Candidate Panel</span>
+
+                  <!-- <a  class="sidebar-menu-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" > -->
+                    <!-- <i class="flaticon-to-do-list"></i> -->
+                    <!-- <i class="flaticon-menu-1"></i> -->
+                    <!-- <span class="title">ACTION</span> -->
+                  <!-- </a> -->
+                    <!-- <span class="sub-title gray-color">ACTION</span> -->
+
+
+                    <a (click)="logout()" style="cursor: pointer;" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                      <!-- <i class="flaticon-to-do-list"></i> -->
+                      <i class="flaticon-airplane"></i>
+                      <span class="title">Logout</span>
+                    </a>
+
+
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

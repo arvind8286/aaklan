@@ -1,0 +1,127 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <button  type="button"  mat-flat-button class="tagus" (click)="backtostdlist()">
+
+    <!-- <span class="flaticon-chevron-1"></span> -->
+    <i class="ri-arrow-left-line"></i>
+    Back to Home</button>
+  <h3 class="mb-0">Viva Question List</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Viva Question List</li>
+
+  </ol>
+</div>
+
+<mat-card *ngIf="questionfeatch"  class="teamMembersListTable mb-25 tagus-card">
+  <mat-card-header class="border-bottom">
+    <!-- <video #videoElement [hidden]="true" width="640" height="480" autoplay></video>
+    <canvas [hidden]="true" #canvasElement width="640" height="480"></canvas> -->
+
+
+    <div class="row">
+
+
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <h5 class="mb-0">Answer Provided to:</h5>
+        <br>
+        <nav aria-label="Page navigation example d-flex">
+          <button mat-mini-fab *ngFor="let ans of vivadata;let i=index" [ngClass]="vivadata[i].answer!=null ? 'text-bg-success mb-10 ms-5' : 'text-soft-dark mb-10 ms-5'" (click)="answerindex(i)">{{i+1}}</button>
+
+            <!-- <button mat-mini-fab *ngFor="let ans of vivadata;let i=index" [ngClass]="vivadata[i]!=null ? 'text-bg-success mb-10 ms-5' : 'text-soft-dark mb-10 ms-5'" (click)="answerindex(i)">{{i+1}}</button> -->
+            <!-- <button mat-mini-fab *ngFor="let ans of vivadata;let i=index" class="text-soft-dark mb-10 ms-5" >{{i+1}}</button> -->
+            <!-- <button mat-mini-fab  [ngClass]="answelabel" >1</button> -->
+            <!-- <button mat-mini-fab  class=" text-bg-success mb-10 ms-5" >1</button>
+            <button mat-mini-fab  class=" text-bg-warning mb-10 ms-5" >1</button>
+            <button mat-mini-fab  class=" text-soft-dark mb-10 ms-5" >1</button> -->
+
+
+      </nav>
+      </div>
+
+    </div>
+
+  </mat-card-header>
+  <mat-card-content >
+    <div class="row">
+      <div class=" d-flex col-md-12 col-lg-12 col-sm-12 text-bg-primary border-radius  text-center ">
+          <h5 class="m-15  text-white ">Question: <span class="badge rounded-pill text-bg-warning"><h6>{{currentquestion+1}} of {{vivadata.length}}</h6></span> </h5>
+          <h5 class="m-15  text-white justify-content-end">Total Time Remaining: &nbsp;<span  class="badge rounded-pill text-bg-danger">60 min</span></h5>
+
+      </div>
+    </div>
+    <br>
+    <div class="row mb-25">
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <h3>Q {{currentquestion+1}}. {{vivadata[currentquestion].question}}</h3>
+      </div>
+    </div>
+    <hr>
+    <div class="row mb-30">
+      <div class="col">
+
+        <h6>CHOSE ANSWER ,OPTIONS ARE:</h6>
+      </div>
+    </div>
+    <mat-radio-group [(ngModel)]="vivadata[currentquestion].answer">
+    <div class="row mb-25">
+
+      <div class="col-md-6 col-lg-6 col-sm-12" >
+
+
+        <h5><span class="badge rounded-pill text-bg-warning text-bold">A</span>  <mat-radio-button  value="a" >{{vivadata[currentquestion].option1}}</mat-radio-button></h5>
+
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <h5><span class="badge rounded-pill text-bg-warning text-bold">B</span>  <mat-radio-button  value="b" >{{vivadata[currentquestion].option2}}</mat-radio-button></h5>
+
+      </div>
+    </div>
+    <div class="row mb-25">
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <h5><span class="badge rounded-pill text-bg-warning text-bold">C</span>  <mat-radio-button  value="c">{{vivadata[currentquestion].option3}}</mat-radio-button></h5>
+
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <h5><span class="badge rounded-pill text-bg-warning text-bold">D</span>  <mat-radio-button  value="d">{{vivadata[currentquestion].option4}}</mat-radio-button></h5>
+
+      </div>
+
+    </div>
+  </mat-radio-group>
+    <hr>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="row mt-25">
+      <div class="col-md-6 col-lg-6 col-sm-12">
+
+      </div>
+      <div class="col-md-12 col-lg-12 col-sm-12 ">
+
+        <button  mat-raised-button class="text-soft-dark me-25 " (click)="previous()" *ngIf="currentquestion > 0"><i class="ri-arrow-left-double-fill"></i> Previous </button>
+        <button  mat-raised-button color="primary me-25 " *ngIf="currentquestion < vivadata.length - 1" (click)="next()" >Next <i class="ri-arrow-right-double-fill"></i> </button>
+        <button  mat-raised-button class="text-bg-success me-25 " (click)=" submit()"  > Submit & Next <i class="ri-arrow-right-double-fill"></i></button>
+
+      </div>
+    </div>
+    <div class="row mt-30 justify-content-end">
+      <div class="col-3  ">
+        <button  mat-flat-button class="tagus me-25 btn-bg-danger end" color="warn" (click)="finish()" >Finish Test</button>
+
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>
+<div *ngIf="questionfeatch==false" class="row">
+  <div class="alert alert-primary text-center" role="alert">
+
+Question is not set or Your Viva Exam is not alloted
+
+
+  </div>
+</div>

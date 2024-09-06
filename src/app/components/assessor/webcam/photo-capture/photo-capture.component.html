@@ -1,0 +1,8 @@
+<div>
+
+  <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+  <button  mat-flat-button class="tagus me-25 btn-bg-danger end" color="warn" (click)="triggerSnapshot()" >Capture Photo</button>
+
+  <!-- <button (click)="triggerSnapshot()" class="tagus btn-bg-danger">Capture Photo</button> -->
+  <img *ngIf="_WebcamImage" [src]="_WebcamImage.imageAsDataUrl"/>
+</div>

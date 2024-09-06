@@ -1,0 +1,107 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h3 class="mb-0">Assessor Panel</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Assessor Panel</li>
+
+  </ol>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h2 class="mb-0 badge text-bg-success">Welcome <span class="badge text-bg-warning"> {{sname}}</span></h2>
+  </mat-card-header>
+ </mat-card>
+
+ <!-- custom list -->
+
+  <div *ngIf="record" class="alert alert-info text-center" role="alert">
+
+    <h3>You have no any batches is Assigned</h3>
+
+       </div>
+ <div *ngFor="let item of examlistobj index as i" class="mb-25 col-sm-12">
+  <mat-card  class="mb-10 p-team-card tagus-card">
+      <mat-card-header>
+          <div>
+              <h5 class="mb-8">{{item.question_set_details.paper_set_name|capitalize}}</h5>
+              <p>{{item.batch_data.batch_name |capitalize}} </p>
+          </div>
+          <div>
+              <button type="button" mat-button class="position-relative dot-btn p-0 border-none" [matMenuTriggerFor]="monthMenu">
+                  <i class="ri-more-fill"></i>
+              </button>
+              <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
+                  <button mat-menu-item (click)="candlist(item.batch_id,item.question_set_id)" type="button" class="bg-transparent border-none position-relative">
+                      Candidate List
+                  </button>
+                  <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                    Evidance List
+                  </button>
+                  <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                      Batch Start
+                  </button>
+              </mat-menu>
+          </div>
+      </mat-card-header>
+      <mat-card-content>
+
+          <div  class="info d-flex align-items-start justify-content-space-between">
+              <div>
+                <div class="title"><h5 class="mb-5">Batch Details</h5></div>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Batch Name :</span> {{item.batch_data.batch_name |capitalize}}</span>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Assessment Mode :</span> {{item.batch_data.assessment_mode |capitalize}}</span>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Batch Type :</span> {{item.batch_data.batch_type |capitalize}}</span>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Assessment Type  :</span> {{item.batch_data.assessment_type |capitalize}}</span>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Batch No :</span> {{item.batch_data.batch_no |capitalize}}</span>
+                  <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">No Of Candidate   :</span> {{item.batch_data.no_of_candidate}}</span>
+              </div>
+              <div>
+                <div class="title"><h5 class="mb-5">Assessment Details</h5></div>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Assessment Mode :</span> {{item.question_set_details.assessment_mode}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Question Set Name :</span> {{item.question_set_details.paper_set_name}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Assessment Type  :</span> {{item.question_set_details.assessment_type}}</span>
+
+              </div>
+              <div>
+                <div class="title"><h5 class="mb-5">Training Partner Details</h5></div>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">TP Name  :</span> {{item.training_partner_data.training_partner_name}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Address :</span> {{item.training_partner_data.training_partner_address}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Pincode :</span> {{item.training_partner_data.pincode}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Contact Person :</span> {{item.training_partner_data.contact_person}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Contact Number :</span> {{item.training_partner_data.contact_number}}</span>
+
+              </div>
+              <div>
+                <div class="title"><h5 class="mb-5">Assessor Details </h5></div>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Name  :</span> {{item.assessor_details.first_name}} {{item.assessor_details.middle_name}} {{item.assessor_details.last_name}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Email :</span> {{item.assessor_details.email}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Contact No :</span> {{item.assessor_details.contact_number}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">SIP USER ID :</span> {{item.assessor_details.sip_user_id}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Login User :</span> {{item.assessor_details.login_username}}</span>
+                <span class="d-block mb-5 gray-color fs-16"><span class="fw-bold">Login Password:</span> {{item.assessor_details.login_password}}</span>
+                  <!-- <span class="d-block gray-color fs-16"><span class="fw-bold">Batch Name :</span> hkjhjkhjk</span> -->
+                  <!-- <span class="d-block mb-5">  <button mat-icon-button color="primary"  matTooltip="Candidate List" matTooltipPosition="above" (click)="candlist(item.batch_id)">
+                    <mat-icon>supervisor_account</mat-icon>  </button></span>
+
+                    <span class="d-block mb-5">  <button mat-icon-button color="primary"  matTooltip="Evidance List" matTooltipPosition="above">
+                      <mat-icon>format_list_bulleted</mat-icon>  </button></span>
+
+                      <span class="d-block mb-5"> <button mat-icon-button color="primary"  matTooltip="Batch Start" matTooltipPosition="above">
+                        <mat-icon>power_settings_new</mat-icon>  </button></span> -->
+
+              </div>
+
+
+          </div>
+      </mat-card-content>
+  </mat-card>
+</div>
+
+  <!-- custom list end -->

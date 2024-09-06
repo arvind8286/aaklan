@@ -1,0 +1,89 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <button type="button" mat-flat-button class="tagus" (click)="backtostudentreport()">
+
+    <!-- <span class="flaticon-chevron-1"></span> -->
+    <i class="ri-arrow-left-line"></i>
+    Back to Candidate List</button>
+  <h3 class="mb-0">Candidate Evidence Report</h3>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Home
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Base</li>
+    <li class="breadcrumb-item fw-semibold">Candidate Evidence  Report</li>
+
+  </ol>
+</div>
+
+<!-- Aggrid view data -->
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h3 class="mb-0">Candidate Evidence Report</h3>
+    <hr/>
+  </mat-card-header>
+  <mat-card-content>
+    <hr>
+    <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+
+
+
+      <div *ngIf="getevdList"  class="row">
+        <div class="col-6">
+          <h4>Captured Image</h4>
+          <img [src]="getevdList.uploadPhotos.capture_image.image" style="margin: 10px !important;" class="img-fluid" height="150px" width="200px" alt="">
+          <br>
+
+          <p>
+            <span class="text-bold ">Date:</span> <span class="text-center">{{getevdList.uploadPhotos.capture_image.date}}</span></p>
+
+        </div>
+        <div class="col-6">
+          <h4>Upload Image</h4>
+          <img [src]="getevdList.uploadPhotos.uploaded_image.image" style="margin: 10px !important;" class="img-fluid" height="150px"  width="200px" alt="">
+          <br>
+
+          <p>
+            <span class="text-bold ">Date:</span> <span class="text-center">{{getevdList.uploadPhotos.uploaded_image.date}}</span></p>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <h4>Auto captured Image During Exam</h4><br>
+      <div class="row">
+        <div *ngFor="let img of getevdList.examPhotosResp" class="col-3">
+          <div class="row">
+            <div class="col">
+              <img [src]="img.image" style="margin: 10px !important;" class="img-fluid" height="150px" alt=""> <br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <p>
+              <span class="text-bold ">Date:</span> <span class="text-center"> {{img.date}}</span></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <br><br>
+      <div class="row">
+        <h4>Exam Location</h4>
+        <hr>
+        <div  class="col-12 text-center">
+          <div style="height: 560px;width: 820px;" [innerHTML]="safelocation" >
+
+        </div>
+      </div>
+    </div>
+</div>
+    <!-- <mat-paginator [pageSizeOptions]="[10,50,100, 200, 300]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+</mat-paginator> -->
+  </mat-card-content>
+</mat-card>
+<!-- Aggriddata end -->
